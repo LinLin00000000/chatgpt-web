@@ -37,7 +37,6 @@
 			- [前端网页](#前端网页-1)
 	- [常见问题](#常见问题)
 	- [参与贡献](#参与贡献)
-	- [赞助](#赞助)
 	- [License](#license)
 ## 介绍
 
@@ -318,26 +317,5 @@ A: 接口每次返回的内容是有长度限制的，可以修改根目录下`.
 
 贡献之前请先阅读 [贡献指南](./CONTRIBUTING.md)
 
-感谢所有做过贡献的人!
-
-<a href="https://github.com/Chanzhaoyu/chatgpt-web/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Chanzhaoyu/chatgpt-web" />
-</a>
-
-## 赞助
-
-如果你觉得这个项目对你有帮助，并且情况允许的话，可以给我一点点支持，总之非常感谢支持～
-
-<div style="display: flex; gap: 20px;">
-	<div style="text-align: center">
-		<img style="max-width: 100%" src="./docs/wechat.png" alt="微信" />
-		<p>WeChat Pay</p>
-	</div>
-	<div style="text-align: center">
-		<img style="max-width: 100%" src="./docs/alipay.png" alt="支付宝" />
-		<p>Alipay</p>
-	</div>
-</div>
-
 ## License
-MIT © [ChenZhaoYu](./license)
+[MIT License](./license)
