@@ -29,3 +29,5 @@ coverage
 *.sw?
 
 build
+
+*test.ts
