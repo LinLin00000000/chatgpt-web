@@ -15,7 +15,7 @@ const userStore = useUserStore()
 
 const userInfo = computed(() => userStore.userInfo)
 
-window.logto = logto
+// window.logto = logto
 </script>
 
 <template>
