@@ -196,7 +196,7 @@ http://localhost:3002/
 
 #### Docker compose
 
-[Hub 地址](https://hub.docker.com/repository/docker/linlinqaq/chatgpt-web)
+[Hub 地址](https://hub.docker.com/r/linlinqaq/chatgpt-web)
 
 ```yml
 version: '3'
