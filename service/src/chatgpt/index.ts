@@ -23,12 +23,12 @@ const ErrorCodeMessage: Record<string, string> = {
   500: '[OpenAI] 服务器繁忙，请稍后再试 | Internal Server Error',
 }
 
-const timeoutMs: number = !isNaN(+process.env.TIMEOUT_MS) ? +process.env.TIMEOUT_MS : 30 * 1000
+const timeoutMs: number = !isNaN(+process.env.TIMEOUT_MS) ? +process.env.TIMEOUT_MS : 100 * 1000
 const disableDebug: boolean = process.env.OPENAI_API_DISABLE_DEBUG === 'true'
 
 let apiModel: ApiModel
 let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
-let model = 'gpt-3.5-turbo'
+const model = isNotEmptyString(process.env.OPENAI_API_MODEL) ? process.env.OPENAI_API_MODEL : 'gpt-3.5-turbo'
 
 if (!isNotEmptyString(process.env.OPENAI_API_KEY) && !isNotEmptyString(process.env.OPENAI_ACCESS_TOKEN))
   throw new Error('Missing OPENAI_API_KEY or OPENAI_ACCESS_TOKEN environment variable')
@@ -56,8 +56,6 @@ const retryIntervalMs = !isNaN(+process.env.RETRY_INTERVAL_MS) ? +process.env.RE
 
   if (isNotEmptyString(process.env.OPENAI_API_KEY)) {
     const OPENAI_API_BASE_URL = process.env.OPENAI_API_BASE_URL
-    const OPENAI_API_MODEL = process.env.OPENAI_API_MODEL
-    model = isNotEmptyString(OPENAI_API_MODEL) ? OPENAI_API_MODEL : 'gpt-3.5-turbo'
 
     const options: ChatGPTAPIOptions = {
       apiKey: '喵',
@@ -87,18 +85,12 @@ const retryIntervalMs = !isNaN(+process.env.RETRY_INTERVAL_MS) ? +process.env.RE
     apiModel = 'ChatGPTAPI'
   }
   else {
-    const OPENAI_API_MODEL = process.env.OPENAI_API_MODEL
     const options: ChatGPTUnofficialProxyAPIOptions = {
-      accessToken: '喵',
+      accessToken: process.env.OPENAI_ACCESS_TOKEN,
+      apiReverseProxyUrl: isNotEmptyString(process.env.API_REVERSE_PROXY) ? process.env.API_REVERSE_PROXY : 'https://bypass.churchless.tech/api/conversation',
+      model,
       debug: !disableDebug,
     }
-
-    if (isNotEmptyString(OPENAI_API_MODEL))
-      options.model = OPENAI_API_MODEL
-
-    options.apiReverseProxyUrl = isNotEmptyString(process.env.API_REVERSE_PROXY)
-      ? process.env.API_REVERSE_PROXY
-      : 'https://bypass.churchless.tech/api/conversation'
 
     setupProxy(options)
 
